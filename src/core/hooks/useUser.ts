@@ -24,7 +24,7 @@ export const CheckUser = () => {
             }
         }
 
-        if (!token && userData._id) {
+        if (!token && userData.id) {
             logout();
         }
     };

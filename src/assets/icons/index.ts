@@ -8,6 +8,14 @@ import Success from './success.png';
 import Failure from './failure.png';
 import Person from './person.png';
 import Logo from './logo.svg';
+import Alert from './alert.svg';
+import Trash from './trash.svg';
+import Export from './export.svg';
+import Add from './add.svg';
+import Cross from './cross.svg';
+import Tick from './tick.svg';
+import BookEdit from './book-edit.svg';
+import Cancel from './cancel.svg';
 
 export const ICONS = {
     Twitter,
@@ -20,4 +28,12 @@ export const ICONS = {
     Failure,
     Person,
     Logo,
+    Alert,
+    Trash,
+    Export,
+    Add,
+    Cross,
+    Tick,
+    BookEdit,
+    Cancel,
 };

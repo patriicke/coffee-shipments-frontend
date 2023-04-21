@@ -43,3 +43,12 @@ export const get_all_users = async (
         throw new CustomError(AxiosErrorHandler(error));
     }
 };
+
+export const delete_user = async (user_id: string) => {
+    try {
+        const request = await PRIVATE_API.delete(`/users/${user_id}`);
+        return await request.data;
+    } catch (error: any) {
+        throw new CustomError(AxiosErrorHandler(error));
+    }
+};

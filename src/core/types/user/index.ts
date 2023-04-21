@@ -9,11 +9,6 @@ export type UserType = ModelType & {
     role: 'ADMIN' | 'MEMBER';
     rooms: [];
     status: string;
-    chatTheme: {
-        color: boolean;
-        image: boolean;
-        content: string;
-    };
 };
 
 export type CreateUserPayloadType = {

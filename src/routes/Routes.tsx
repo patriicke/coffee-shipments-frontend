@@ -1,13 +1,14 @@
 import { useRoutes } from 'react-router-dom';
-import AdminPageLayout from '~/components/layouts/admin/AdminPageLayout';
 import AppLayout from '~/components/layouts/app/AppLayout';
 import AuthPageLayout from '~/components/layouts/auth/AuthPageLayout';
 import NotFoundPage from '~/pages/notfound/NotFoundPage';
-import { AdminRouteProtector } from '~/core/protector/admin/AdminProtector';
 import HomePage from '~/pages/home/HomePage';
 import { AuthRouteProtector } from '~/core/protector/auth/AuthProtector';
-import { AdminRoutes } from './admin/AdminRoutes';
 import { AuthRoutes } from './auth/AuthRoutes';
+import { TracePageLayout } from '~/components/layouts/trace/TracePageLayout';
+import { TraceRouteProtector } from '~/core/protector/trace/TraceProtector';
+import { TraceRoutes } from './trace/TraceRoutes';
+import { HomeRouteProtector } from '~/core/protector/home/HomeProtector';
 
 export const Routes = () => {
     return useRoutes([
@@ -17,7 +18,7 @@ export const Routes = () => {
             children: [
                 {
                     path: '/',
-                    element: <HomePage />,
+                    element: <HomeRouteProtector element={<HomePage />} />,
                 },
                 {
                     path: 'auth',
@@ -27,11 +28,11 @@ export const Routes = () => {
                     children: AuthRoutes,
                 },
                 {
-                    path: 'admin',
+                    path: 'trace',
                     element: (
-                        <AdminRouteProtector element={<AdminPageLayout />} />
+                        <TraceRouteProtector element={<TracePageLayout />} />
                     ),
-                    children: AdminRoutes,
+                    children: TraceRoutes,
                 },
             ],
         },

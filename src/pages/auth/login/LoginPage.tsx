@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Login - Project Name</title>
+                <title>Login - COFFEE TRACEABILITY</title>
             </Helmet>
             <div className="flex h-screen w-screen object-cover">
                 <img

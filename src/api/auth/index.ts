@@ -25,7 +25,7 @@ export const login_user = async (
 
 export const who_am_i = async () => {
     try {
-        const request = await PRIVATE_API.get('/user/whoami');
+        const request = await PRIVATE_API.get('/users/check');
         return request.data;
     } catch (error) {
         throw new CustomError(AxiosErrorHandler(error));

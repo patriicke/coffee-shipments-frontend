@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
-type ColumnType<Entry> = {
+import { format } from './format';
+export type ColumnType<Entry> = {
     label: string;
     selector: (row: Entry, index: number) => void;
 };
 
 export const exportToCSV = <Entry>(
+    fileName: string,
     columns: ColumnType<Entry>[],
     data: Entry[]
-): string => {
-    let result = '';
+) => {
+    let csvText = '';
 
     const columnDelimiter = ',';
 
@@ -18,22 +20,33 @@ export const exportToCSV = <Entry>(
 
     columns.forEach(column => labels.push(column.label));
 
-    result += labels.join(columnDelimiter);
-    result += lineDelimiter;
+    csvText += labels.join(columnDelimiter);
+    csvText += lineDelimiter;
 
     data.forEach((element: Entry, index: number) => {
         let ctr = 0;
 
         columns.forEach(column => {
-            if (ctr > 0) result += columnDelimiter;
+            if (ctr > 0) csvText += columnDelimiter;
 
-            result += column.selector(element, index);
+            csvText += column.selector(element, index);
 
             ctr++;
         });
 
-        result += lineDelimiter;
+        csvText += lineDelimiter;
     });
 
-    return result;
+    if (!csvText) return;
+
+    const link = document.createElement('a');
+
+    const file = `RDTech - ${fileName} - ${format.todayDate()}.csv`;
+
+    if (!csvText.match(/^data:text\/csv/i))
+        csvText = `data:text/csv;charset=utf-8,${csvText}`;
+
+    link.setAttribute('href', encodeURI(csvText));
+    link.setAttribute('download', file);
+    link.click();
 };

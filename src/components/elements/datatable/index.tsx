@@ -52,7 +52,7 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
         searchParams.set('pageNumber', params.pageNumber.toString());
         searchParams.set('pageSize', params.pageSize.toString());
         let keyword = searchParams.get('search');
-        if(!keyword) searchParams.delete('search');
+        if (!keyword) searchParams.delete('search');
         const newSearch = searchParams.toString();
         navigate(`${location.pathname}?${newSearch}`);
     };
@@ -115,10 +115,10 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
 
     return (
         <div>
-            <div className="w-full overflow-x-auto">
-                <table className="divide-gray-300 w-full divide-y overflow-hidden whitespace-nowrap">
+            <div className="w-full overflow-auto">
+                <table className="w-full divide-y divide-gray-200 overflow-hidden whitespace-nowrap">
                     <thead>
-                        <tr className="bg-gray-500">
+                        <tr className="bg-primary-500">
                             <th className="py-3 px-2 text-center text-sm font-medium text-white">
                                 #
                             </th>
@@ -133,22 +133,22 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="border-2 border-dark-light hover:bg-dark-light">
+                        <tr className="border-2">
                             {isLoading && (
                                 <td
                                     colSpan={columns.length + 1}
-                                    className="py-3 px-2 text-center text-sm font-normal text-light"
+                                    className="text-light py-3 px-2 text-center text-sm font-normal"
                                 >
-                                    One moment please ...
+                                    Wait a moment ...
                                 </td>
                             )}
 
                             {!isLoading && data.length === 0 && (
                                 <td
                                     colSpan={columns.length + 1}
-                                    className="py-3 px-2 text-center text-sm font-normal text-light"
+                                    className="text-light py-3 px-2 text-center text-sm font-normal"
                                 >
-                                    No entries found
+                                    No data found
                                 </td>
                             )}
                         </tr>
@@ -157,9 +157,9 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
                             data.map((element, elementKey) => (
                                 <tr
                                     key={elementKey}
-                                    className="border-2 border-dark-light hover:bg-dark-light"
+                                    className="border-2 even:bg-blue-100"
                                 >
-                                    <td className="py-3 px-2 text-center text-sm font-normal text-light">
+                                    <td className="text-light py-3 px-2 text-center text-sm font-normal">
                                         {paginate.pageSize * currentPage -
                                             paginate.pageSize +
                                             elementKey +
@@ -169,7 +169,7 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
                                     {columns.map((column, columnKey) => (
                                         <td
                                             key={columnKey}
-                                            className="py-3 px-2 text-left text-sm font-normal text-light"
+                                            className="text-light py-3 px-2 text-left text-sm font-normal"
                                         >
                                             {column.cell(element, elementKey)}
                                         </td>
@@ -181,7 +181,7 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
             </div>
 
             {!isLoading && data.length > 0 && (
-                <div className="text-gray-600 flex w-full flex-wrap items-center justify-between gap-2 py-4 text-sm font-medium">
+                <div className="flex w-full flex-wrap items-center justify-between gap-2 py-4 text-sm font-medium text-gray-600">
                     <div className="flex items-center justify-between gap-2">
                         <span className="min-w-20 cursor-pointer rounded-md bg-slate-200 p-2 px-4  duration-100 disabled:cursor-default">
                             {paginate.pageSize * currentPage -
@@ -192,7 +192,7 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
                         <span className="flex items-center justify-center gap-2">
                             <label className="text-white">Rows/Page</label>
                             <select
-                                className="placeholder-gray-500 block w-16 appearance-none rounded-md border-0 bg-slate-100 px-3 text-base font-medium capitalize text-dark focus:outline-none focus:ring-0 disabled:bg-slate-500 disabled:text-slate-100"
+                                className="text-dark block w-16 appearance-none rounded-md border-0 bg-slate-100 px-3 text-base font-medium capitalize placeholder-gray-500 focus:outline-none focus:ring-0 disabled:bg-slate-500 disabled:text-slate-100"
                                 onChange={onpageSizeChange}
                                 defaultValue={10}
                                 disabled={total <= 5}
@@ -207,30 +207,30 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
                         </span>
                     </div>
 
-                    <div className="text-gray-600 flex flex-wrap justify-end gap-2 text-sm font-medium">
+                    <div className="flex flex-wrap justify-end gap-2 text-sm font-medium text-gray-600">
                         <button
-                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-red-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
+                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-primary-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
                             disabled={currentPage === 1}
                             onClick={onClickFirstPage}
                         >
                             First
                         </button>
                         <button
-                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-red-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
+                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-primary-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
                             disabled={!previousPage}
                             onClick={onClickPreviousPage}
                         >
                             Previous
                         </button>
                         <button
-                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-red-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
+                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-primary-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
                             disabled={!nextPage}
                             onClick={onClickNextPage}
                         >
                             Next
                         </button>
                         <button
-                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-red-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
+                            className="cursor-pointer rounded-md bg-slate-200 p-2 px-4 duration-100 hover:bg-primary-500 hover:text-white disabled:cursor-default disabled:bg-slate-500 disabled:text-slate-100"
                             disabled={lastPage === currentPage}
                             onClick={onClickLastPage}
                         >
