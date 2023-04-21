@@ -7,6 +7,7 @@ import ArrowUp from './arrow-up.svg';
 import Success from './success.png';
 import Failure from './failure.png';
 import Person from './person.png';
+import Logo from './logo.svg';
 
 export const ICONS = {
     Twitter,
@@ -18,4 +19,5 @@ export const ICONS = {
     Success,
     Failure,
     Person,
+    Logo,
 };
