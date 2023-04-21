@@ -16,7 +16,7 @@ export type RegisterUserDTO = {
     country: string;
     region: string;
     address: string;
-    role?: string;
+    role: string;
 };
 
 export const register_user = async (

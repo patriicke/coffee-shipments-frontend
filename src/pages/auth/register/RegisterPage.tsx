@@ -17,7 +17,7 @@ const schema = z
         country: z.string().min(1, 'Country Name is required'),
         region: z.string().min(1, 'Region is required'),
         address: z.string().min(1, 'Address is required'),
-        // role: z.string().min(1, 'Role is required'),
+        role: z.string().min(1, 'Role is required'),
         password: z.string().min(1, 'Password is required'),
         confirm_password: z.string().min(1, 'Confirm Password is required'),
     })
@@ -26,12 +26,12 @@ const schema = z
         path: ['confirm_password'],
     });
 
-type CountryType = {
+type SelectType = {
     value: string;
     label: string;
 };
 
-const select_countries: CountryType[] = countries.map(
+const selectable_countries: SelectType[] = countries.map(
     (country: { name: string; code: string }) => {
         return {
             value: country.name,
@@ -39,6 +39,21 @@ const select_countries: CountryType[] = countries.map(
         };
     }
 );
+
+const selectable_roles: SelectType[] = [
+    {
+        value: 'producer',
+        label: 'producer',
+    },
+    {
+        value: 'supplier',
+        label: 'supplier',
+    },
+    {
+        value: 'distributor',
+        label: 'distributor',
+    },
+];
 
 const RegisterPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -51,7 +66,7 @@ const RegisterPage: React.FC = () => {
         try {
             setError('');
             setIsLoading(true);
-            const data = await register_user({ ...payload, role: 'user' });
+            const data = await register_user(payload);
             const { access_token, user } = data;
             storage.setToken(access_token);
             dispatch(adduserRedux(user));
@@ -124,7 +139,7 @@ const RegisterPage: React.FC = () => {
                                                     />
                                                     <SelectField
                                                         options={
-                                                            select_countries
+                                                            selectable_countries
                                                         }
                                                         label={'Country Name'}
                                                         error={
@@ -138,6 +153,24 @@ const RegisterPage: React.FC = () => {
                                                         isLoading={isLoading}
                                                         placeholder={
                                                             'Select Country'
+                                                        }
+                                                    />
+                                                    <SelectField
+                                                        options={
+                                                            selectable_roles
+                                                        }
+                                                        label={'Role'}
+                                                        error={
+                                                            formState.errors
+                                                                .role
+                                                        }
+                                                        registration={register(
+                                                            'role'
+                                                        )}
+                                                        className="h-12"
+                                                        isLoading={isLoading}
+                                                        placeholder={
+                                                            'Select Role'
                                                         }
                                                     />
                                                     <InputField
