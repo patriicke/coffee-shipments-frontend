@@ -1,14 +1,12 @@
 import { ModelType } from '../model';
 
 export type UserType = ModelType & {
-    fullname: string;
-    email: string;
+    name: string;
     username: string;
-    password: string;
-    profile_image: string;
-    role: 'ADMIN' | 'MEMBER';
-    rooms: [];
-    status: string;
+    country: string;
+    region: string;
+    address: string;
+    role: string;
 };
 
 export type CreateUserPayloadType = {

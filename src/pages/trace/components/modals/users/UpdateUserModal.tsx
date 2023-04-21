@@ -33,7 +33,7 @@ export const UpdateUserModal: React.FC<
             setIsLoading(true);
             if (
                 user.role === payload.role &&
-                user.email === payload.username &&
+                user.name === payload.name &&
                 user.username === payload.username
             ) {
                 toast.warn('Nothing  to update');
@@ -54,7 +54,7 @@ export const UpdateUserModal: React.FC<
             <div className="flex h-full w-full max-w-[32em] flex-col gap-3 bg-white p-7 md:w-2/4 xl:w-2/5">
                 <div className="flex items-center  justify-between">
                     <h1 className="text-xl font-semibold text-primary-500">
-                        Update {user.fullname}
+                        Update {user.name}
                     </h1>
                     <button onClick={onClose}>
                         <img src={ICONS.Cancel} alt="Cancel Logo" />

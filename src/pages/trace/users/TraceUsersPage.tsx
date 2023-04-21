@@ -100,24 +100,25 @@ export const TraceUsersPage = () => {
     const columns: TableColumn<UserType>[] = [
         {
             title: 'Names',
-            cell: row => row.fullname,
+            cell: row => row.name,
         },
         {
             title: 'Username',
             cell: row => row.username,
         },
         {
-            title: 'Email',
-            cell: row => row.email,
+            title: 'Country',
+            cell: row => row.country,
+        }, {
+            title: 'Region',
+            cell: row => row.region,
+        }, {
+            title: 'Address',
+            cell: row => row.address,
         },
         {
             title: 'Role',
             cell: row => row.role,
-        },
-
-        {
-            title: 'Status',
-            cell: row => row.status,
         },
         {
             title: 'Actions',
@@ -196,7 +197,7 @@ export const TraceUsersPage = () => {
                 cancel_button_title="Cancel"
                 action={deleteUser}
                 isOpen={isDeleteUserOpen}
-                title={`Are you sure you want to Delete ${currentUser?.fullname}`}
+                title={`Are you sure you want to Delete ${currentUser?.name}`}
                 onClose={() => setIsDeleteUserOpen(false)}
                 isLoading={isLoadingDeleteUser}
             />

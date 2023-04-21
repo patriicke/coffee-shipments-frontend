@@ -13,16 +13,16 @@ export const CheckUser = () => {
     const { userData } = useSelector((state: REDUX_STORE_TYPE) => state.user);
 
     const fetchUser = async () => {
-        if (token) {
-            try {
-                const data = await who_am_i();
-                const { user, access_token } = data.data;
-                dispatch(adduserRedux(user));
-                storage.setToken(access_token);
-            } catch (error) {
-                logout();
-            }
-        }
+        // if (token) {
+        //     try {
+        //         const data = await who_am_i();
+        //         const { user, access_token } = data.data;
+        //         dispatch(adduserRedux(user));
+        //         storage.setToken(access_token);
+        //     } catch (error) {
+        //         logout();
+        //     }
+        // }
 
         if (!token && userData.id) {
             logout();
