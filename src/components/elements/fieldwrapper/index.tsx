@@ -30,7 +30,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
         <div className="block w-full">
             <label>
                 {label && (
-                    <div className="mb-3 text-base font-semibold text-white">
+                    <div className="mb-3 text-base font-medium text-gray-500">
                         {label}
                     </div>
                 )}

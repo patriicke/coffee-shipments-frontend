@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>HOME- COFFEE SHIPMENT - TRACK SHIPMENT</title>
+                <title>COFFEE TRACEABILITY</title>
             </Helmet>
             <div className="h-screen w-screen overflow-y-auto overflow-x-hidden">
                 <img
@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
                                 className="flex h-full items-center justify-center"
                             />
                             <span className="flex h-full items-center justify-center text-base">
-                                COFFEE SHIPMENT
+                                COFFEE TRACEABILITY
                             </span>
                         </div>
                         <ul className="flex items-center justify-center gap-6 text-base">
@@ -58,7 +58,7 @@ const HomePage: React.FC = () => {
                                 BLOGS
                             </Link>
                         </ul>
-                        <div className="flex items-center justify-center gap-5 text-base font-medium">
+                        <div className="flex items-center justify-center gap-5 text-base">
                             <Link
                                 to="/auth/register"
                                 className="rounded-[2em] bg-secondary-500 py-2 px-6"
@@ -75,8 +75,8 @@ const HomePage: React.FC = () => {
                     </div>
                     <div className="flex h-[calc(100%_-_5rem)] w-full items-center px-20">
                         <div className="flex flex-col gap-5">
-                            <h1 className="w-[10em] text-[3em] font-bold text-white">
-                                COFFEE SHIPMENT MADE SIMPLE
+                            <h1 className="w-[12em] text-[3em] font-bold text-white">
+                                COFFEE TRACEABILITY MADE SIMPLE
                             </h1>
                             <p className="w-1/4 text-base font-light text-white">
                                 The coffee shipment tracking system is a
@@ -89,9 +89,9 @@ const HomePage: React.FC = () => {
                             </p>
                             <Link
                                 to={'/ship'}
-                                className="w-fit rounded-[3em] bg-secondary-500 px-12 py-5 font-semibold text-white"
+                                className="w-fit rounded-[3em] bg-secondary-500 px-10 py-4 font-semibold text-white"
                             >
-                                SHIP NOW
+                                TRACE NOW
                             </Link>
                         </div>
                     </div>

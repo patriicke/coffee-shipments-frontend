@@ -63,12 +63,12 @@ export const InputField = (props: InputFieldProps) => {
                     {type === 'password' &&
                         (passwordVisible ? (
                             <EyeIcon
-                                className="icon-md cursor-pointer text-secondary-200"
+                                className="icon-md cursor-pointer text-primary-500"
                                 onClick={() => setPasswordVisible(false)}
                             />
                         ) : (
                             <EyeOffIcon
-                                className="icon-md cursor-pointer text-secondary-200"
+                                className="icon-md cursor-pointer text-primary-500"
                                 onClick={() => setPasswordVisible(true)}
                             />
                         ))}

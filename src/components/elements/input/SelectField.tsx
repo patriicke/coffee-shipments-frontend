@@ -40,7 +40,7 @@ export const SelectField = (props: SelectFieldProps) => {
                 defaultValue=""
                 disabled={isLoading}
                 className={clsx(
-                    'placeholder-gray-500 block w-full appearance-none rounded-md border-0 bg-slate-100 px-3 text-base font-medium capitalize text-dark focus:outline-none focus:ring-0',
+                    'block w-full appearance-none rounded-md border-0 px-3 text-base font-medium capitalize text-gray-700 focus:outline-none focus:ring-0',
                     icon ? 'px-0' : 'pl-3',
                     className
                 )}

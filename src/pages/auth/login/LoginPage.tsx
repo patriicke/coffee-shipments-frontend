@@ -57,9 +57,14 @@ const LoginPage: React.FC = () => {
                         <div className="-mx-4 flex flex-wrap">
                             <div className="w-full px-4 ">
                                 <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-20 px-10 sm:px-12 md:px-[60px]">
-                                    <div className="flex flex-col pb-3 text-2xl font-semibold">
-                                        <span>Hey,</span>
-                                        <span>Login Here</span>
+                                    <div className="flex flex-col gap-1 pb-4 text-center">
+                                        <h1 className="w-full text-xl font-medium">
+                                            Welcome Back
+                                        </h1>
+                                        <span className="w-full">
+                                            Enter your credentials to log in
+                                            again!
+                                        </span>
                                     </div>
                                     <Form<LoginUserDTO, typeof schema>
                                         schema={schema}
@@ -96,18 +101,6 @@ const LoginPage: React.FC = () => {
                                                         type="password"
                                                     />
                                                 </div>
-
-                                                <p className="md:text-md mt-3 text-sm">
-                                                    Forgot your password?
-                                                    <Link
-                                                        to={
-                                                            '/auth/reset-password'
-                                                        }
-                                                        className="hover:text-primary md:text-md mx-1  mt-3 inline-block text-sm text-primary-500 underline hover:underline"
-                                                    >
-                                                        Reset
-                                                    </Link>
-                                                </p>
 
                                                 <p className="md:text-md mt-3 text-sm">
                                                     Don't have an account?
