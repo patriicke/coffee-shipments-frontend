@@ -51,7 +51,7 @@ const RegisterPage: React.FC = () => {
         try {
             setError('');
             setIsLoading(true);
-            const data = await register_user(payload);
+            const data = await register_user({ ...payload, role: 'user' });
             const { access_token, user } = data;
             storage.setToken(access_token);
             dispatch(adduserRedux(user));
