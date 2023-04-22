@@ -1,4 +1,6 @@
 import React, { ReactNode, useContext, useEffect, useRef } from 'react';
+import LogoutSVG from '~/assets/svgs/LogoutSVG';
+import { useLogout } from '~/core/hooks';
 import {
     AdminContext,
     AdminContextType,
@@ -7,6 +9,8 @@ import {
 export const SideBar: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { isSidebarOpen, closeSidebar } =
         useContext<AdminContextType>(AdminContext);
+
+    const { logout } = useLogout();
 
     const SIDE_BAR_ELEMENT = useRef<any>(null);
 
@@ -25,7 +29,7 @@ export const SideBar: React.FC<{ children: ReactNode }> = ({ children }) => {
         <aside
             className={`h-full min-w-[20rem] ${
                 isSidebarOpen ? 'absolute block md:relative' : 'hidden md:block'
-            } z-50  gap-2 px-4 md:w-1/5  `}
+            } z-50  gap-2 border-r border-primary-500 bg-primary-500 bg-opacity-30 px-4 md:w-1/5 `}
             ref={SIDE_BAR_ELEMENT}
         >
             <div className="relative flex h-20 items-center  gap-2 text-primary-500">
@@ -52,8 +56,17 @@ export const SideBar: React.FC<{ children: ReactNode }> = ({ children }) => {
                     <span>COFFEE TRACEABILITY</span>
                 </span>
             </div>
-            <div className="z-20 h-full overflow-y-auto duration-150 ease-in-out">
+            <div className="z-20 h-[calc(100%_-_10rem)] overflow-y-auto duration-150 ease-in-out">
                 {children}
+            </div>
+            <div className="h-20">
+                <button
+                    className="flex items-center gap-2 font-medium text-primary-500"
+                    onClick={logout}
+                >
+                    <LogoutSVG />
+                    <span>Log Out</span>
+                </button>
             </div>
         </aside>
     );

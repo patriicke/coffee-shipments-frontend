@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { SideBar } from '~/components/sidebar/SideBar';
+import { SideBar } from '~/components/common/sidebar/SideBar';
 import { AdminContextProvider } from '~/core/provider/admin/AdminProvider';
 import { TraceNavBarComponent } from '~/pages/trace/components/navbar/TraceNavBarComponent';
 import { TraceSideBarNavigationComponent } from '~/pages/trace/components/sidebar/TraceSideBarNavigationComponent';

@@ -45,7 +45,7 @@ export const TraceSideBarNavigationComponent: React.FC = () => {
         <div>
             <nav>
                 <div></div>
-                <ul className="flex flex-col gap-2 p-2">
+                <ul className="flex flex-col gap-2">
                     {links.map(({ href, icon, title }, index) => {
                         return (
                             <li
