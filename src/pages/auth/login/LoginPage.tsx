@@ -56,7 +56,7 @@ const LoginPage: React.FC = () => {
                     <div className="container mx-auto">
                         <div className="-mx-4 flex flex-wrap">
                             <div className="w-full px-4 ">
-                                <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-20 px-10 sm:px-12 md:px-[60px]">
+                                <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg border border-primary-500 bg-white py-20 px-10 sm:px-12 md:px-[60px]">
                                     <div className="flex flex-col gap-1 pb-4 text-center">
                                         <h1 className="w-full text-xl font-medium">
                                             Welcome Back

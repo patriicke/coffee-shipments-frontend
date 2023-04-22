@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 type NavLinkType = { path: string; text: string };
 
-const NavBarComponent: React.FC = () => {
+export const HomeNavBarComponent: React.FC = () => {
     const nav_links: NavLinkType[] = [
         {
             path: '/about',
@@ -67,5 +67,3 @@ const NavBarComponent: React.FC = () => {
         </div>
     );
 };
-
-export default NavBarComponent;

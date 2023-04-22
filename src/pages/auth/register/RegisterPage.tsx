@@ -92,7 +92,7 @@ const RegisterPage: React.FC = () => {
                     <div className="container mx-auto">
                         <div className="-mx-4 flex flex-wrap">
                             <div className="w-full px-4 ">
-                                <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-20 px-10 sm:px-12 md:px-[60px]">
+                                <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg border border-primary-500 bg-white py-20 px-10 sm:px-12 md:px-[60px]">
                                     <div className="flex flex-col pb-4 text-xl font-medium">
                                         <span className="w-full text-center">
                                             Create an account here
@@ -141,7 +141,6 @@ const RegisterPage: React.FC = () => {
                                                         options={
                                                             selectable_countries
                                                         }
-                                                        label={'Country Name'}
                                                         error={
                                                             formState.errors
                                                                 .country
@@ -153,24 +152,6 @@ const RegisterPage: React.FC = () => {
                                                         isLoading={isLoading}
                                                         placeholder={
                                                             'Select Country'
-                                                        }
-                                                    />
-                                                    <SelectField
-                                                        options={
-                                                            selectable_roles
-                                                        }
-                                                        label={'Role'}
-                                                        error={
-                                                            formState.errors
-                                                                .role
-                                                        }
-                                                        registration={register(
-                                                            'role'
-                                                        )}
-                                                        className="h-12"
-                                                        isLoading={isLoading}
-                                                        placeholder={
-                                                            'Select Role'
                                                         }
                                                     />
                                                     <InputField
@@ -198,6 +179,23 @@ const RegisterPage: React.FC = () => {
                                                         className="h-12"
                                                         isLoading={isLoading}
                                                         type="text"
+                                                    />
+                                                    <SelectField
+                                                        options={
+                                                            selectable_roles
+                                                        }
+                                                        error={
+                                                            formState.errors
+                                                                .role
+                                                        }
+                                                        registration={register(
+                                                            'role'
+                                                        )}
+                                                        className="h-12"
+                                                        isLoading={isLoading}
+                                                        placeholder={
+                                                            'Select Role'
+                                                        }
                                                     />
                                                     <InputField
                                                         placeholder="Enter Your Password"

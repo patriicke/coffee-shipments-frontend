@@ -10,19 +10,19 @@ const HomePage: React.FC = () => {
             <Helmet>
                 <title>COFFEE TRACEABILITY</title>
             </Helmet>
-            <div className="h-screen w-screen overflow-y-auto overflow-x-hidden">
+            <div className="h-screen w-screen overflow-y-auto overflow-x-hidden bg-primary-500">
                 <img
                     src={Illustrations.HomeIllustration}
                     className="absolute top-0 z-0 h-screen w-screen object-fill blur-md"
                 />
                 <div className="fixed z-50 h-full w-full bg-opacity-0">
-                    <div className="flex h-20 w-full items-center justify-between px-20  text-white">
-                        <div className="relative flex h-full items-center justify-center gap-2">
+                    <div className="flex h-20 w-full justify-between px-20  text-white">
+                        <div className="relative flex gap-2">
                             <LogoSVG
                                 width={40}
-                                className="flex h-full items-center justify-center"
+                                className="flex items-center justify-center"
                             />
-                            <span className="flex h-full items-center justify-center text-base">
+                            <span className="flex items-center justify-center text-base">
                                 COFFEE TRACEABILITY
                             </span>
                         </div>
@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
                                 until they arrive at the final destination.
                             </p>
                             <Link
-                                to={'/ship'}
+                                to={'/trace'}
                                 className="w-fit rounded-[3em] bg-secondary-500 px-10 py-4 font-semibold text-white"
                             >
                                 TRACE NOW

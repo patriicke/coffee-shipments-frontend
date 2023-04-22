@@ -22,7 +22,7 @@ const NotFoundPage: React.FC = () => {
                                     found.
                                 </h4>
                                 <Link
-                                    className="text-md inline-block rounded-lg border border-secondary-500 px-8 py-3 text-center font-semibold text-white transition hover:bg-secondary-500 hover:text-primary-500"
+                                    className="text-md inline-block rounded-lg border border-secondary-500 px-8 py-3 text-center font-semibold text-white transition hover:bg-secondary-500"
                                     to={'/'}
                                 >
                                     Go Back Home

@@ -34,11 +34,11 @@ export const Routes = () => {
                     ),
                     children: TraceRoutes,
                 },
+                {
+                    path: '*',
+                    element: <NotFoundPage />,
+                },
             ],
-        },
-        {
-            path: '*',
-            element: <NotFoundPage />,
         },
     ]);
 };
