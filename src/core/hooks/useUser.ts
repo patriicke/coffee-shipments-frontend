@@ -13,8 +13,7 @@ export const CheckUser = () => {
     const fetchUser = async () => {
         if (token) {
             try {
-                const data = await who_am_i();
-                const user = data.data;
+                const user = await who_am_i();
                 dispatch(adduserRedux(user));
             } catch (error) {
                 logout();

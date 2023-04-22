@@ -183,7 +183,7 @@ export const DataTable = <Entry extends {}>(props: DataTableProps<Entry>) => {
             {!isLoading && data.length > 0 && (
                 <div className="flex w-full flex-wrap items-center justify-between gap-2 py-4 text-sm font-medium text-gray-600">
                     <div className="flex items-center justify-between gap-2">
-                        <span className="min-w-20 cursor-pointer rounded-md bg-slate-200 p-2 px-4  duration-100 disabled:cursor-default">
+                        <span className="min-w-20  rounded-md bg-slate-200 p-2 px-4  duration-100">
                             {paginate.pageSize * currentPage -
                                 paginate.pageSize +
                                 1}{' '}

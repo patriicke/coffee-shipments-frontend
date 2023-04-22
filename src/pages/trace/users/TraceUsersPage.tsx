@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
     AddNewButton,
     AlertModal,
@@ -16,8 +17,8 @@ import { exportToCSV, updateQuerySearchParams } from '~/core/utils';
 import { UserType } from '~/core/types/user';
 import { delete_user, get_all_users } from '~/api/user';
 import { UsersColumnCSV } from '~/core/helper';
-import CreateUserModal from '../components/modals/users/CreateUserModal';
 import { UpdateUserModal } from '../components/modals/users/UpdateUserModal';
+import { CreateUserModal } from '../components/modals/users/CreateUserModal';
 
 export const TraceUsersPage = () => {
     const location = useLocation();
@@ -135,7 +136,7 @@ export const TraceUsersPage = () => {
             cell: row => (
                 <div className="flex gap-3">
                     <BookEditButton onClick={() => handleUpdateUser(row)} />
-                    <DeleteButton onClick={() => handleDeleteUser(row)} />
+                    {/* <DeleteButton onClick={() => handleDeleteUser(row)} /> */}
                 </div>
             ),
         },

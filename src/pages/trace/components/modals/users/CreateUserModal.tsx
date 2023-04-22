@@ -58,7 +58,7 @@ const selectable_roles: SelectType[] = [
     },
 ];
 
-const CreateUserModal: React.FC<ModalProps> = props => {
+export const CreateUserModal: React.FC<ModalProps> = props => {
     const { onClose } = props;
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -189,5 +189,3 @@ const CreateUserModal: React.FC<ModalProps> = props => {
         </div>
     );
 };
-
-export default CreateUserModal;

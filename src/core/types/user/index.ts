@@ -8,11 +8,3 @@ export type UserType = ModelType & {
     address: string;
     role: string;
 };
-
-export type CreateUserPayloadType = {
-    email: string;
-    fullname: string;
-    username: string;
-    password: string;
-    profile_image?: string;
-};

@@ -9,18 +9,15 @@ import {
     ModalProps,
     SelectField,
 } from '~/components/elements';
-import { UserType } from '~/core/types';
-import { RegisterUserDTO, update_user } from '~/api/user';
-import { countries } from '~/data';
+import { RegisterShipmentDTO, update_shipment } from '~/api/ship';
+import { ShippingType } from '~/core/types/shippings';
 import { ClickEvent } from '~/core/hooks/useClickEvent';
 
 const schema = z.object({
-    name: z.string().min(1, 'Name is required'),
-    username: z.string().min(1, 'Username is required'),
-    country: z.string().min(1, 'Country Name is required'),
-    region: z.string().min(1, 'Region is required'),
-    address: z.string().min(1, 'Address is required'),
-    role: z.string().min(1, 'Role is required'),
+    origin: z.string().min(1, 'Origin is required'),
+    destination: z.string().min(1, 'Destination is required'),
+    quantity: z.string().min(1, 'Quantity is required'),
+    status: z.string().min(1, 'Status is required'),
 });
 
 type SelectType = {
@@ -28,55 +25,40 @@ type SelectType = {
     label: string;
 };
 
-const selectable_countries: SelectType[] = countries.map(
-    (country: { name: string; code: string }) => {
-        return {
-            value: country.name,
-            label: country.name,
-        };
-    }
-);
-
-const selectable_roles: SelectType[] = [
+const selectable_status: SelectType[] = [
     {
-        value: 'producer',
-        label: 'producer',
+        value: 'active',
+        label: 'active',
     },
     {
-        value: 'supplier',
-        label: 'supplier',
-    },
-    {
-        value: 'distributor',
-        label: 'distributor',
+        value: 'inactive',
+        label: 'inactive',
     },
 ];
 
-export const UpdateUserModal: React.FC<
+export const UpdateShippingModal: React.FC<
     ModalProps & {
-        user: UserType;
+        ship: ShippingType;
         successFunction?: Function;
     }
 > = props => {
-    const { onClose, user, successFunction } = props;
+    const { onClose, ship, successFunction } = props;
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const handleSubmit = async (payload: RegisterUserDTO) => {
+    const handleSubmit = async (payload: RegisterShipmentDTO) => {
         try {
             setIsLoading(true);
             if (
-                user.role === payload.role &&
-                user.name === payload.name &&
-                user.username === payload.username &&
-                user.address === payload.address &&
-                user.country === payload.country &&
-                user.region === payload.region
+                ship.origin === payload.origin &&
+                ship.quantity === payload.quantity &&
+                ship.destination === payload.destination &&
+                ship.status === payload.status
             ) {
                 toast.warn('Nothing  to update');
                 return;
             }
-            const updated_user = await update_user(user.id, payload);
+            const updated_user = await update_shipment(ship.id, payload);
             if (successFunction) successFunction(updated_user);
             console.log(updated_user);
             toast.success('User updated successfully');
@@ -100,71 +82,52 @@ export const UpdateUserModal: React.FC<
             >
                 <div className="flex items-center  justify-between">
                     <h1 className="text-xl font-semibold text-primary-500">
-                        Update {user.name}
+                        Update Shipment
                     </h1>
                     <button onClick={onClose}>
                         <img src={ICONS.Cancel} alt="Cancel Logo" />
                     </button>
                 </div>
                 <div className="overflow-auto py-3">
-                    <Form<
-                        RegisterUserDTO & { confirm_password: string },
-                        typeof schema
-                    >
+                    <Form<RegisterShipmentDTO, typeof schema>
                         schema={schema}
                         onSubmit={handleSubmit}
-                        options={{ defaultValues: user }}
+                        options={{ defaultValues: ship }}
                     >
                         {({ register, formState }) => (
                             <>
                                 <div className="flex flex-col gap-4">
                                     <InputField
-                                        placeholder="Enter Your Names"
-                                        error={formState.errors.name}
-                                        registration={register('name')}
+                                        placeholder="Enter Your Origin"
+                                        error={formState.errors.origin}
+                                        registration={register('origin')}
                                         className="h-12"
                                         isLoading={isLoading}
                                         type="text"
                                     />
                                     <InputField
-                                        placeholder="Enter Your Username"
-                                        error={formState.errors.username}
-                                        registration={register('username')}
+                                        placeholder="Enter Destination"
+                                        error={formState.errors.destination}
+                                        registration={register('destination')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        type="text"
+                                    />
+                                    <InputField
+                                        placeholder="Enter Quantity"
+                                        error={formState.errors.quantity}
+                                        registration={register('quantity')}
                                         className="h-12"
                                         isLoading={isLoading}
                                         type="text"
                                     />
                                     <SelectField
-                                        options={selectable_countries}
-                                        error={formState.errors.country}
-                                        registration={register('country')}
+                                        placeholder="Select Status"
+                                        error={formState.errors.status}
+                                        registration={register('status')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        placeholder={'Select Country'}
-                                    />
-                                    <InputField
-                                        placeholder="Enter Your Region"
-                                        error={formState.errors.region}
-                                        registration={register('region')}
-                                        className="h-12"
-                                        isLoading={isLoading}
-                                        type="text"
-                                    />
-                                    <InputField
-                                        placeholder="Enter Your Address"
-                                        error={formState.errors.address}
-                                        registration={register('address')}
-                                        className="h-12"
-                                        isLoading={isLoading}
-                                        type="text"
-                                    />
-                                    <SelectField
-                                        options={selectable_roles}
-                                        error={formState.errors.role}
-                                        registration={register('role')}
-                                        className="h-12"
-                                        isLoading={isLoading}
-                                        placeholder={'Select Role'}
+                                        options={selectable_status}
                                     />
                                 </div>
                                 <Button
