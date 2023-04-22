@@ -13,10 +13,10 @@ const HomePage: React.FC = () => {
             <div className="h-screen w-screen overflow-y-auto overflow-x-hidden bg-primary-500">
                 <img
                     src={Illustrations.HomeIllustration}
-                    className="absolute top-0 z-0 h-screen w-screen object-fill blur-md"
+                    className="absolute top-0 z-0 h-screen w-screen object-cover blur-md"
                 />
                 <div className="fixed z-50 h-full w-full bg-opacity-0">
-                    <div className="flex h-20 w-full justify-between px-20  text-white">
+                    <div className="flex h-20 w-full justify-between px-4 text-white lg:px-10  xl:px-20">
                         <div className="relative flex gap-2">
                             <LogoSVG
                                 width={40}
@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
                                 COFFEE TRACEABILITY
                             </span>
                         </div>
-                        <ul className="flex items-center justify-center gap-6 text-base">
+                        <ul className="hidden items-center justify-center gap-6 text-base lg:flex">
                             <Link
                                 to={'#'}
                                 className="hover:underline hover:underline-offset-4"
@@ -73,12 +73,12 @@ const HomePage: React.FC = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex h-[calc(100%_-_5rem)] w-full items-center px-20">
-                        <div className="flex flex-col gap-5">
-                            <h1 className="w-[12em] text-[3em] font-bold text-white">
+                    <div className="lx:px-10 flex h-[calc(100%_-_5rem)] w-full items-center px-4   xl:px-20">
+                        <div className="flex flex-col items-center justify-center gap-5 md:items-start md:justify-start">
+                            <h1 className="w-[10em] text-center text-[2em] font-bold text-white md:text-start xl:w-[12em] xl:text-[3em]">
                                 COFFEE TRACEABILITY MADE SIMPLE
                             </h1>
-                            <p className="w-1/4 text-base font-light text-white">
+                            <p className="w-4/8 text-base font-light text-white xl:w-1/4">
                                 The coffee shipment tracking system is a
                                 comprehensive tool that enables users to monitor
                                 the movement of coffee shipments throughout the
