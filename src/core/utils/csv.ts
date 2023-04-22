@@ -41,7 +41,7 @@ export const exportToCSV = <Entry>(
 
     const link = document.createElement('a');
 
-    const file = `RDTech - ${fileName} - ${format.todayDate()}.csv`;
+    const file = `COFFEE-TRACEABLITY - ${fileName} - ${format.todayDate()}.csv`;
 
     if (!csvText.match(/^data:text\/csv/i))
         csvText = `data:text/csv;charset=utf-8,${csvText}`;

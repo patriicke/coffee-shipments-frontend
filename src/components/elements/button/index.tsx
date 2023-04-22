@@ -58,8 +58,8 @@ export const ExportButton = (props: CustomButtonProps) => {
     const { onClick } = props;
     return (
         <button
-            className="bg-secondary-700 flex items-center justify-center gap-2
-rounded-md px-10 py-3 text-sm font-semibold text-primary-500"
+            className="flex items-center justify-center gap-2 rounded-md
+bg-primary-500 px-10 py-3 text-sm font-semibold text-white"
             onClick={onClick}
         >
             <img src={ICONS.Export} alt="Export Logo" />

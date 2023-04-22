@@ -20,13 +20,10 @@ export type RegisterUserDTO = {
 };
 
 export const register_user = async (
-    memberPayload: RegisterUserDTO
+    user_payload: RegisterUserDTO
 ): Promise<RegisterUserPayload> => {
     try {
-        const request = await PRIVATE_API.post(
-            '/users/register',
-            memberPayload
-        );
+        const request = await PRIVATE_API.post('/users/register', user_payload);
         return await request.data;
     } catch (error: any) {
         throw new CustomError(AxiosErrorHandler(error));
@@ -37,7 +34,7 @@ export const get_all_users = async (
     query?: string
 ): Promise<PaginationType<UserType>> => {
     try {
-        const request = await PRIVATE_API.get(`/users?${queryString(query)}`);
+        const request = await PRIVATE_API.get(`/users${queryString(query)}`);
         return await request.data;
     } catch (error: any) {
         throw new CustomError(AxiosErrorHandler(error));
@@ -47,6 +44,30 @@ export const get_all_users = async (
 export const delete_user = async (user_id: string) => {
     try {
         const request = await PRIVATE_API.delete(`/users/${user_id}`);
+        return await request.data;
+    } catch (error: any) {
+        throw new CustomError(AxiosErrorHandler(error));
+    }
+};
+
+export const update_user = async (
+    user_id: string,
+    user_payload: RegisterUserDTO
+): Promise<UserType> => {
+    try {
+        const request = await PRIVATE_API.put(
+            `/users/${user_id}`,
+            user_payload
+        );
+        return await request.data;
+    } catch (error: any) {
+        throw new CustomError(AxiosErrorHandler(error));
+    }
+};
+
+export const get_user = async (user_id: string): Promise<UserType> => {
+    try {
+        const request = await PRIVATE_API.get(`/users/${user_id}`);
         return await request.data;
     } catch (error: any) {
         throw new CustomError(AxiosErrorHandler(error));

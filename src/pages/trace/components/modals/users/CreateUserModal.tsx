@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 import { RegisterUserDTO, register_user } from '~/api/user';
@@ -10,14 +10,17 @@ import {
     ModalProps,
     SelectField,
 } from '~/components/elements';
+import { ClickEvent } from '~/core/hooks/useClickEvent';
+import { countries } from '~/data';
 
 const schema = z
     .object({
-        role: z.string().min(1, 'Role is required'),
         name: z.string().min(1, 'Name is required'),
-        email: z.string().min(1, 'Email is required').email(),
         username: z.string().min(1, 'Username is required'),
-        phoneNumber: z.string().min(1, 'Phone number is required'),
+        country: z.string().min(1, 'Country Name is required'),
+        region: z.string().min(1, 'Region is required'),
+        address: z.string().min(1, 'Address is required'),
+        role: z.string().min(1, 'Role is required'),
         password: z.string().min(1, 'Password is required'),
         confirm_password: z.string().min(1, 'Confirm Password is required'),
     })
@@ -26,29 +29,32 @@ const schema = z
         path: ['confirm_password'],
     });
 
-export const UserRolesOptions: {
-    label: string;
+type SelectType = {
     value: string;
-}[] = [
+    label: string;
+};
+
+const selectable_countries: SelectType[] = countries.map(
+    (country: { name: string; code: string }) => {
+        return {
+            value: country.name,
+            label: country.name,
+        };
+    }
+);
+
+const selectable_roles: SelectType[] = [
     {
-        label: 'Admin',
-        value: 'admin',
+        value: 'producer',
+        label: 'producer',
     },
     {
-        label: 'Technician',
-        value: 'technician',
+        value: 'supplier',
+        label: 'supplier',
     },
     {
-        label: 'Stock Manager',
-        value: 'stock_manager',
-    },
-    {
-        label: 'Logistic Manager',
-        value: 'logistic_manager',
-    },
-    {
-        label: 'Management',
-        value: 'management',
+        value: 'distributor',
+        label: 'distributor',
     },
 ];
 
@@ -69,11 +75,17 @@ const CreateUserModal: React.FC<ModalProps> = props => {
             setIsLoading(false);
         }
     };
+    const ELEMENT: any = useRef();
+
+    ClickEvent(ELEMENT, onClose);
 
     return (
         <div className="flex h-full w-full justify-end rounded-md p-2">
-            <div className="flex h-full w-full max-w-[32em] flex-col gap-3 bg-white p-7 md:w-2/4 xl:w-2/5">
-                <div className="flex items-center  justify-between">
+            <div
+                className="flex h-full w-full max-w-[32em] flex-col gap-3 bg-white p-7 md:w-2/4 xl:w-2/5"
+                ref={ELEMENT}
+            >
+                <div className="flex items-center justify-between">
                     <h1 className="text-xl font-semibold text-primary-500">
                         Add New User
                     </h1>
@@ -93,26 +105,47 @@ const CreateUserModal: React.FC<ModalProps> = props => {
                             <>
                                 <div className="flex flex-col gap-4">
                                     <InputField
-                                        placeholder="Ex: Junior Rurangwa"
+                                        placeholder="Enter Your Names"
                                         error={formState.errors.name}
                                         registration={register('name')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Name'}
                                         type="text"
                                     />
                                     <InputField
-                                        placeholder="Ex: Junior20"
+                                        placeholder="Enter Your Username"
                                         error={formState.errors.username}
                                         registration={register('username')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Username'}
                                         type="text"
                                     />
                                     <SelectField
-                                        options={UserRolesOptions}
-                                        label={'Role'}
+                                        options={selectable_countries}
+                                        error={formState.errors.country}
+                                        registration={register('country')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        placeholder={'Select Country'}
+                                    />
+                                    <InputField
+                                        placeholder="Enter Your Region"
+                                        error={formState.errors.region}
+                                        registration={register('region')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        type="text"
+                                    />
+                                    <InputField
+                                        placeholder="Enter Your Address"
+                                        error={formState.errors.address}
+                                        registration={register('address')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        type="text"
+                                    />
+                                    <SelectField
+                                        options={selectable_roles}
                                         error={formState.errors.role}
                                         registration={register('role')}
                                         className="h-12"
@@ -120,16 +153,15 @@ const CreateUserModal: React.FC<ModalProps> = props => {
                                         placeholder={'Select Role'}
                                     />
                                     <InputField
-                                        placeholder="**********"
+                                        placeholder="Enter Your Password"
                                         error={formState.errors.password}
                                         registration={register('password')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Password'}
                                         type="password"
                                     />
                                     <InputField
-                                        placeholder="**********"
+                                        placeholder="Confirm Your Password"
                                         error={
                                             formState.errors.confirm_password
                                         }
@@ -138,7 +170,6 @@ const CreateUserModal: React.FC<ModalProps> = props => {
                                         )}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Confirm Password'}
                                         type="password"
                                     />
                                 </div>

@@ -10,21 +10,54 @@ import {
     SelectField,
 } from '~/components/elements';
 import { UserType } from '~/core/types';
-import { UserRolesOptions } from './CreateUserModal';
-import { RegisterUserDTO } from '~/api/user';
+import { RegisterUserDTO, update_user } from '~/api/user';
+import { countries } from '~/data';
 
 const schema = z.object({
-    role: z.string().min(1, 'Role is required'),
     name: z.string().min(1, 'Name is required'),
-    email: z.string().min(1, 'Email is required').email(),
     username: z.string().min(1, 'Username is required'),
-    phoneNumber: z.string().min(1, 'Phone number is required'),
+    country: z.string().min(1, 'Country Name is required'),
+    region: z.string().min(1, 'Region is required'),
+    address: z.string().min(1, 'Address is required'),
+    role: z.string().min(1, 'Role is required'),
 });
 
+type SelectType = {
+    value: string;
+    label: string;
+};
+
+const selectable_countries: SelectType[] = countries.map(
+    (country: { name: string; code: string }) => {
+        return {
+            value: country.name,
+            label: country.name,
+        };
+    }
+);
+
+const selectable_roles: SelectType[] = [
+    {
+        value: 'producer',
+        label: 'producer',
+    },
+    {
+        value: 'supplier',
+        label: 'supplier',
+    },
+    {
+        value: 'distributor',
+        label: 'distributor',
+    },
+];
+
 export const UpdateUserModal: React.FC<
-    ModalProps & { user: UserType }
+    ModalProps & {
+        user: UserType;
+        successFunction?: Function;
+    }
 > = props => {
-    const { onClose, user } = props;
+    const { onClose, user, successFunction } = props;
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -34,12 +67,17 @@ export const UpdateUserModal: React.FC<
             if (
                 user.role === payload.role &&
                 user.name === payload.name &&
-                user.username === payload.username
+                user.username === payload.username &&
+                user.address === payload.address &&
+                user.country === payload.country &&
+                user.region === payload.region
             ) {
                 toast.warn('Nothing  to update');
                 return;
             }
-            // await update_user(user.id, payload);
+            const updated_user = await update_user(user.id, payload);
+            if (successFunction) successFunction(updated_user);
+            console.log(updated_user);
             toast.success('User updated successfully');
             onClose();
         } catch (error: any) {
@@ -71,53 +109,56 @@ export const UpdateUserModal: React.FC<
                     >
                         {({ register, formState }) => (
                             <>
-                                {/* <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-4">
                                     <InputField
-                                        placeholder="Ex: Junior Rurangwa"
+                                        placeholder="Enter Your Names"
                                         error={formState.errors.name}
                                         registration={register('name')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Name'}
                                         type="text"
                                     />
                                     <InputField
-                                        placeholder="Ex: Junior20"
+                                        placeholder="Enter Your Username"
                                         error={formState.errors.username}
                                         registration={register('username')}
                                         className="h-12"
                                         isLoading={isLoading}
-                                        label={'Username'}
                                         type="text"
                                     />
                                     <SelectField
-                                        options={UserRolesOptions}
-                                        label={'Role'}
+                                        options={selectable_countries}
+                                        error={formState.errors.country}
+                                        registration={register('country')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        placeholder={'Select Country'}
+                                    />
+                                    <InputField
+                                        placeholder="Enter Your Region"
+                                        error={formState.errors.region}
+                                        registration={register('region')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        type="text"
+                                    />
+                                    <InputField
+                                        placeholder="Enter Your Address"
+                                        error={formState.errors.address}
+                                        registration={register('address')}
+                                        className="h-12"
+                                        isLoading={isLoading}
+                                        type="text"
+                                    />
+                                    <SelectField
+                                        options={selectable_roles}
                                         error={formState.errors.role}
                                         registration={register('role')}
                                         className="h-12"
                                         isLoading={isLoading}
                                         placeholder={'Select Role'}
                                     />
-                                    <InputField
-                                        placeholder="Ex: example@gmail.com"
-                                        error={formState.errors.email}
-                                        registration={register('email')}
-                                        className="h-12"
-                                        isLoading={isLoading}
-                                        label={'Email'}
-                                        type="email"
-                                    />
-                                    <InputField
-                                        placeholder="Ex: 0788888888"
-                                        error={formState.errors.phoneNumber}
-                                        registration={register('phoneNumber')}
-                                        className="h-12"
-                                        isLoading={isLoading}
-                                        label={'Phone Number'}
-                                        type="text"
-                                    />
-                                </div> */}
+                                </div>
                                 <Button
                                     type="submit"
                                     variant="bg-primary-500"

@@ -1,5 +1,7 @@
 import {
+    faCoffee,
     faHouse,
+    faShip,
     faUser,
     IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +35,11 @@ export const TraceSideBarNavigationComponent: React.FC = () => {
             href: '/users',
             icon: faUser,
         },
+        {
+            title: 'Shippings',
+            href: '/shippings',
+            icon: faCoffee,
+        },
     ];
 
     useEffect(() => {
@@ -42,47 +49,44 @@ export const TraceSideBarNavigationComponent: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <nav>
-                <div></div>
-                <ul className="flex flex-col gap-2">
-                    {links.map(({ href, icon, title }, index) => {
-                        return (
-                            <li
-                                onClick={() => {
-                                    setTab(index);
-                                    toggleSidebar();
-                                }}
-                                key={index}
-                            >
-                                {tab === index ? (
-                                    <Link
-                                        to={`/trace${href}`}
-                                        className="flex items-center gap-2 rounded-md bg-blue-400 p-2"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={icon}
-                                            className="text-md"
-                                        />
-                                        {title}
-                                    </Link>
-                                ) : (
-                                    <Link
-                                        to={`/admin${href}`}
-                                        className="flex items-center gap-2 p-2"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={icon}
-                                            className="text-md"
-                                        />
-                                        {title}
-                                    </Link>
-                                )}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
-        </div>
+        <section className="flex h-full w-full pt-20">
+            <ul className="flex w-full flex-col gap-2">
+                {links.map(({ href, icon, title }, index) => {
+                    return (
+                        <li
+                            onClick={() => {
+                                setTab(index);
+                                toggleSidebar();
+                            }}
+                            key={index}
+                        >
+                            {tab === index ? (
+                                <Link
+                                    to={`/trace${href}`}
+                                    className="flex items-center gap-2 rounded-md bg-secondary-500 p-2 text-white"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={icon}
+                                        className="text-md"
+                                    />
+                                    {title}
+                                </Link>
+                            ) : (
+                                <Link
+                                    to={`/trace${href}`}
+                                    className="flex items-center gap-2 p-2"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={icon}
+                                        className="text-md"
+                                    />
+                                    {title}
+                                </Link>
+                            )}
+                        </li>
+                    );
+                })}
+            </ul>
+        </section>
     );
 };

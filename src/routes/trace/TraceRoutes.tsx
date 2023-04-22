@@ -13,4 +13,9 @@ export const TraceRoutes: RouteObject[] = [
         index: true,
         element: <TraceUsersPage />,
     },
+    {
+        path: 'shippings',
+        index: true,
+        element: <TraceUsersPage />,
+    },
 ];

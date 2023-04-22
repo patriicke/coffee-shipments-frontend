@@ -76,6 +76,14 @@ export const TraceUsersPage = () => {
         setIsUpdateUserOpen(true);
     };
 
+    const handleUpdateUserSuccess = (client: UserType) => {
+        const updated_list = users?.list.map(user => {
+            if (user.id === client.id) return client;
+            return user;
+        });
+        setUsers({ ...users, list: updated_list } as PaginationType<UserType>);
+    };
+
     const deleteUser = async () => {
         try {
             setIsLoadingDeleteUser(true);
@@ -109,10 +117,12 @@ export const TraceUsersPage = () => {
         {
             title: 'Country',
             cell: row => row.country,
-        }, {
+        },
+        {
             title: 'Region',
             cell: row => row.region,
-        }, {
+        },
+        {
             title: 'Address',
             cell: row => row.address,
         },
@@ -185,6 +195,7 @@ export const TraceUsersPage = () => {
                         <UpdateUserModal
                             onClose={() => setIsUpdateUserOpen(false)}
                             user={currentUser}
+                            successFunction={handleUpdateUserSuccess}
                         />
                     }
                     isOpen={isUpdateUserOpen}
