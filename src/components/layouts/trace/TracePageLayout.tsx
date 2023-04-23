@@ -12,7 +12,7 @@ export const TracePageLayout: React.FC = () => {
                 <SideBar>
                     <TraceSideBarNavigationComponent />
                 </SideBar>
-                <div className="w-full md:w-[calc(100%_-_18rem)]">
+                <div className="h-full w-full px-1 md:w-[calc(100%_-_18rem)]">
                     <TraceNavBarComponent />
                     <Outlet />
                 </div>
